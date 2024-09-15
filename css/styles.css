@@ -59,10 +59,6 @@ nav {
     z-index: 10;
 }
 
-nav h1 {
-    color: var(--primary-color);
-}
-
 #desktop-nav {
     display: flex;
     gap: 1rem;
