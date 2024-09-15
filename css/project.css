@@ -1,0 +1,10 @@
+section {
+    text-align: center;
+}
+section h1{
+    margin: 1rem;
+}
+
+section .project img{
+    width: 100%;
+}
