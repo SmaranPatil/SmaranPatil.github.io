@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
-      Projects | Smaran Patil - Atal Innovation Mission | Avishkaar Robotics | College
-      campus ambassador at TechFest, IIT Bombay!
+      Projects | Smaran Patil - Atal Innovation Mission | Avishkaar Robotics |
+      College campus ambassador at TechFest, IIT Bombay!
     </title>
     <link
       rel="stylesheet"
@@ -16,39 +16,23 @@
       href="https://unicons.iconscout.com/release/v4.0.8/css/line.css"
     />
     <link rel="stylesheet" href="../css/styles.css" />
-    <link rel="stylesheet" href="/css/project.css">
-    <link rel="icon" href="../assets/icon.jpg">
+    <link rel="stylesheet" href="/css/project.css" />
+    <link rel="icon" href="../assets/icon.jpg" />
   </head>
   <body>
     <nav>
-      <h1>Smaran Patil</h1>
+      <a href="/"><h1>Smaran Patil</h1></a>
 
-      <!-- Desktop Navigation -->
       <ul id="desktop-nav">
-        <a href="/">
-          <li>Home</li>
-        </a>
-        <a href="/pages/projects.html">
-          <li class="active">Projects</li>
-        </a>
-        <a href="/pages/achievements.html">
-          <li>Achievements</li>
-        </a>
+        <a href="/"><li>Home</li></a>
+        <a href="/pages/projects.html"><li class="active">Projects</li></a>
+        <a href="/pages/achievements.html"><li>Achievements</li></a>
       </ul>
-
-      <!-- Mobile Navigation -->
       <ul id="mobile-nav" class="hidden">
-        <a href="/">
-          <li>Home</li>
-        </a>
-        <a href="/pages/projects.html">
-          <li class="active">Projects</li>
-        </a>
-        <a href="/pages/achievements.html">
-          <li>Achievements</li>
-        </a>
+        <a href="/"><li>Home</li></a>
+        <a href="/pages/projects.html"><li class="active">Projects</li></a>
+        <a href="/pages/achievements.html"><li>Achievements</li></a>
       </ul>
-
       <i class="uis uis-list-ui-alt menu-icon" id="menu-icon"></i>
     </nav>
 
@@ -56,15 +40,51 @@
       <section>
         <h1>Projects</h1>
 
-        <div class="project">
-          <img src="/assets//projects/project1.jpeg" alt="">
-          <img src="/assets//projects/project2.jpeg" alt="">
-          <img src="/assets//projects/project3.jpeg" alt="">
-          <img src="/assets//projects/project4.jpeg" alt="">
-          <img src="/assets//projects/project5.jpeg" alt="">
-          <img src="/assets//projects/project6.jpeg" alt="">
-          <img src="/assets//projects/project7.jpeg" alt="">
-        </div>
+        <!-- Avishkar Section -->
+<div class="project-section">
+  <button class="toggle-btn" data-section="avishkar">Hide Avishkar</button>
+  <div class="project expanded" data-section="avishkar">
+    <div>
+      <img src="/assets/projects/project1.jpeg" alt="Avishkar 1" />
+      <p>Avishkar 1</p>
+    </div>
+    <div>
+      <img src="/assets/projects/project2.jpeg" alt="Avishkar 2" />
+      <p>Avishkar 2</p>
+    </div>
+    <div>
+      <img src="/assets/projects/project3.jpeg" alt="Avishkar 3" />
+      <p>Avishkar 3</p>
+    </div>
+  </div>
+</div>
+
+<!-- ATL Section -->
+<div class="project-section">
+  <button class="toggle-btn" data-section="atl">Hide ATL</button>
+  <div class="project expanded" data-section="atl">
+    <div>
+      <img src="/assets/projects/project4.jpeg" alt="ATL 1" />
+      <p>ATL 1</p>
+    </div>
+    <div>
+      <img src="/assets/projects/project5.jpeg" alt="ATL 2" />
+      <p>ATL 2</p>
+    </div>
+  </div>
+</div>
+
+<!-- Default Section -->
+<div class="project-section">
+  <button class="toggle-btn" data-section="default">Hide Other Projects</button>
+  <div class="project expanded" data-section="default">
+    <div>
+      <img src="/assets/projects/project6.jpeg" alt="Other Project 1" />
+      <p>Other Project 1</p>
+    </div>
+  </div>
+</div>
+
       </section>
     </main>
 
@@ -75,6 +95,6 @@
       <p>Hosted on GitHub Pages</p>
     </footer>
 
-    <script src="js/script.js"></script>
+    <script src="../js/script.js"></script>
   </body>
 </html>
