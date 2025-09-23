@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smaran Patil - Mechanical & IoT Engineer</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🤖%3C/text%3E%3C/svg%3E">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Text:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Wix Madefor Text', sans-serif;
+            background-color: #0d1117;
+            color: #d1d5db;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* --- Custom CSS for the 3D Mechanical Background --- */
+        #gear-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.25;
+        }
+
+        /* --- Custom Gradient Text Effect --- */
+        .gradient-text {
+            background: linear-gradient(90deg, #10b981, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- Text Shadow Effect --- */
+        .text-shadow {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+        }
+
+        /* --- Custom Animations --- */
+        @keyframes pulse-ring {
+            0% {
+                transform: scale(0.33);
+            }
+            80%, 100% {
+                opacity: 0;
+            }
+        }
+        @keyframes pulse-dot {
+            0% {
+                transform: scale(0.8);
+            }
+            50% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(0.8);
+            }
+        }
+
+        .section-separator {
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #10b981, transparent);
+            margin: 4rem 0;
+        }
+        
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3b82f6;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Custom Hover Effects for Cards */
+        .card-hover {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .card-hover:hover {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+            transform: translateY(-5px);
+        }
+
+        /* Enhanced Social Icons */
+        .social-icon-hover {
+            transition: all 0.3s ease-in-out;
+        }
+        .social-icon-hover:hover {
+            color: #10b981;
+            transform: scale(1.2);
+            filter: drop-shadow(0 0 5px #10b981);
+        }
+
+        /* Hide content by default */
+        .collapse-content {
+            display: none;
+        }
+
+        .collapse-content.expanded {
+            display: block;
+        }
+
+        /* New Skills Card Layout */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+        .skill-card {
+            background-color: #1f2937;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            border: 1px solid #374151;
+            text-align: center;
+            transition: all 0.3s ease-in-out;
+        }
+        .skill-card:hover {
+            background-color: #374151;
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+        }
+        .skill-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
+            background: linear-gradient(45deg, #10b981, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <canvas id="gear-canvas"></canvas>
+
+    <div class="relative z-10 min-h-screen p-8 flex flex-col justify-center items-center">
+        <header class="text-center py-20 lg:py-32">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 text-shadow" id="main-title">
+                Hello, I'm Smaran Patil
+            </h1>
+            <h2 class="text-xl md:text-2xl text-gray-400 mb-8">
+                Mechanical & IoT Engineer, a coding enthusiast
+            </h2>
+            <p class="max-w-3xl mx-auto text-base sm:text-lg text-gray-400 leading-relaxed mb-8">
+                I am passionate about building things that move, think, and interact with the world. My expertise lies at the intersection of mechanical design and embedded systems, where I turn complex ideas into reality through a fusion of code and hardware.
+            </p>
+            <nav class="flex justify-center space-x-4">
+                <a href="#projects" class="inline-block px-8 py-3 rounded-full text-white font-semibold transition-all duration-300 ease-in-out transform hover:scale-105" style="background: linear-gradient(90deg, #10b981, #3b82f6);">
+                    View My Work
+                </a>
+                <a href="#contact" class="inline-block px-8 py-3 rounded-full text-gray-200 font-semibold transition-all duration-300 ease-in-out transform hover:scale-105 border border-gray-600 hover:border-teal-400">
+                    Contact Me
+                </a>
+            </nav>
+        </header>
+
+        <div class="section-separator"></div>
+
+        <section id="about" class="container mx-auto max-w-5xl py-16 sm:py-24">
+            <div class="bg-gray-800 bg-opacity-70 backdrop-blur-sm rounded-3xl p-8 sm:p-12 shadow-2xl border border-gray-700">
+                <h3 class="text-3xl font-bold text-gray-200 mb-6 text-center gradient-text">About Me</h3>
+                <p class="text-gray-300 leading-relaxed text-center mb-4">
+                    I'm a passionate technical enthusiast and aspiring engineer with a strong foundation in mechanical design and embedded systems. My journey at Avishkar Robotics in my school's Atal Tinkering Lab has allowed me to thrive in project development, creating innovative projects showcased at Mumbai TechFest and other competitive arenas.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12 text-left">
+                    <div class="p-6 rounded-2xl bg-gray-700 bg-opacity-40 border border-gray-600 card-hover">
+                        <h4 class="text-xl font-semibold mb-4 text-gray-100">Skills Snapshot</h4>
+                        <p class="text-gray-300 leading-relaxed">
+                            A quick overview of my core competencies, from technical expertise to project management.
+                        </p>
+                        <a href="#" id="see-more-link-skills" class="text-blue-400 hover:underline mt-2 inline-block">See more...</a>
+                        
+                        <div id="more-info-skills" class="collapse-content">
+                            <div class="mt-4">
+                                <h5 class="text-lg font-bold text-teal-400 mb-1">Technical & Engineering Skills</h5>
+                                <ul class="list-none text-gray-300 space-y-1">
+                                    <li>- Arduino Development (Arduino Uno Maestro, Arduino Code Weaver)</li>
+                                    <li>- Robotics Development (Avishkaar Robotics, Atal Innovation Mission)</li>
+                                    <li>- Circuit & Electric Management (Current & Voltage Handling)</li>
+                                    <li>- Embedded Systems</li>
+                                    <li>- Generative AI (Google Certified)</li>
+                                    <li>- Cloud Fundamentals (Azure Storage Services – Microsoft Learn badge)</li>
+                                    <li>- Information Technology</li>
+                                </ul>
+                            </div>
+                            <div class="mt-4">
+                                <h5 class="text-lg font-bold text-teal-400 mb-1">Project & Innovation Skills</h5>
+                                <ul class="list-none text-gray-300 space-y-1">
+                                    <li>- Project Development & Prototyping</li>
+                                    <li>- IoT & Automation Concepts</li>
+                                    <li>- Innovation & Product Design</li>
+                                    <li>- Techfest IIT Bombay Campus Ambassador (Event Promotion, Innovation Outreach)</li>
+                                    <li>- Social Media Marketing (Events & Technical Campaigns)</li>
+                                </ul>
+                            </div>
+                            <div class="mt-4">
+                                <h5 class="text-lg font-bold text-teal-400 mb-1">Management & Soft Skills</h5>
+                                <ul class="list-none text-gray-300 space-y-1">
+                                    <li>- Event Management</li>
+                                    <li>- Leadership & Team Collaboration</li>
+                                    <li>- Communication & Presentation</li>
+                                    <li>- Community Service & Volunteering</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6 rounded-2xl bg-gray-700 bg-opacity-40 border border-gray-600 card-hover">
+                        <h4 class="text-xl font-semibold mb-4 text-gray-100">About Ultimate Engineering</h4>
+                        <p class="text-gray-300 leading-relaxed">
+                            Founded in 2016 in Nashik, Maharashtra, Ultimate Engineering is a self-employed welding services provider delivering high-quality, specialized welding solutions.
+                        </p>
+                        <a href="#" id="see-more-link-about" class="text-blue-400 hover:underline mt-2 inline-block">See more...</a>
+                        
+                        <div id="more-info-about" class="collapse-content">
+                            <div class="mt-4">
+                                <h5 class="text-lg font-bold text-teal-400 mb-1">We Offer:</h5>
+                                <ul class="list-none text-gray-300 space-y-1 pl-4">
+                                    <li>- **Comprehensive Welding Services** – including TIG, Titanium, and Aluminum welding, tailored to meet diverse industry needs with precision and durability.</li>
+                                    <li>- **Training & Skill Development** – hands-on programs for aspiring welders, focusing on safety, precision, and industry best practices.</li>
+                                    <li>- **Customized Solutions** – ensuring strong, smooth, and dependable results across complex welding applications.</li>
+                                </ul>
+                            </div>
+                            <div class="mt-4">
+                                <h5 class="text-lg font-bold text-teal-400 mb-1">Workplace & Values</h5>
+                                <ul class="list-none text-gray-300 space-y-1 pl-4">
+                                    <li>- Mandatory use of PPE</li>
+                                    <li>- Compliance with safety protocols</li>
+                                    <li>- Punctuality and professional discipline</li>
+                                </ul>
+                            </div>
+                            <div class="mt-4">
+                                <h5 class="text-lg font-bold text-teal-400 mb-1">Benefits & Work Culture</h5>
+                                <ul class="list-none text-gray-300 space-y-1 pl-4">
+                                    <li>- Dedicated focus hours</li>
+                                    <li>- Remote work options</li>
+                                    <li>- Collaborative workspace</li>
+                                    <li>- Pay equity (location does not impact pay)</li>
+                                </ul>
+                            </div>
+                            <p class="mt-4 text-gray-300">
+                                Ultimate Engineering continues to grow as a trusted name in welding services while fostering innovation, skill development, and industry excellence.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-separator"></div>
+
+        <section id="skills" class="container mx-auto max-w-5xl py-16 sm:py-24">
+            <div class="bg-gray-800 bg-opacity-70 backdrop-blur-sm rounded-3xl p-8 sm:p-12 shadow-2xl border border-gray-700">
+                <h3 class="text-3xl font-bold text-gray-200 mb-12 text-center gradient-text">My Skills</h3>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <div class="skill-icon"><i class="fa-solid fa-gear"></i></div>
+                        <h4 class="text-lg font-semibold text-gray-200">AutoCAD Mechanical</h4>
+                    </div>
+                     <div class="skill-card">
+                        <div class="skill-icon"><i class="fa-solid fa-microchip"></i></div>
+                        <h4 class="text-lg font-semibold text-gray-200">Arduino</h4>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon"><i class="fa-brands fa-python"></i></div>
+                        <h4 class="text-lg font-semibold text-gray-200">Python</h4>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon"><i class="fa-brands fa-css3-alt"></i></div>
+                        <h4 class="text-lg font-semibold text-gray-200">CSS</h4>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon"><i class="fa-brands fa-java"></i></div>
+                        <h4 class="text-lg font-semibold text-gray-200">Java</h4>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon"><i class="fa-brands fa-html5"></i></div>
+                        <h4 class="text-lg font-semibold text-gray-200">HTML</h4>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon"><i class="fa-solid fa-robot"></i></div>
+                        <h4 class="text-lg font-semibold text-gray-200">Generative AI</h4>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon"><i class="fa-solid fa-palette"></i></div>
+                        <h4 class="text-lg font-semibold text-gray-200">Graphic Design</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-separator"></div>
+
+        <section id="projects" class="container mx-auto max-w-5xl py-16 sm:py-24">
+            <h3 class="text-3xl font-bold text-gray-200 mb-12 text-center gradient-text">My Projects</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-gray-800 bg-opacity-70 rounded-2xl p-6 shadow-xl border border-gray-700 hover:scale-105 transition-transform duration-300 card-hover">
+                    <img src="data:image/jpeg;base64,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 w==">
+                    <h4 class="text-xl font-bold text-gray-200 mb-2">IIT Bombay Internship</h4>
+                    <p class="text-gray-400">
+                        I had the valuable opportunity to intern at IIT Bombay, where I contributed to a cutting-edge project and gained hands-on experience in a top-tier research environment.
+                    </p>
+                </div>
+                <div class="bg-gray-800 bg-opacity-70 rounded-2xl p-6 shadow-xl border border-gray-700 hover:scale-105 transition-transform duration-300 card-hover">
+                    <img src="data:image/jpeg;base64,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 w==" alt="Atal Innovation Mission Event" class="rounded-xl mb-4 w-full h-auto">
+                    <h4 class="text-xl font-bold text-gray-200 mb-2">Atal Innovation Mission Official</h4>
+                    <p class="text-gray-400">
+                        As a student trainee for two years, I was part of NITI Aayog's initiative to foster innovation. This experience enhanced my skills in project development and entrepreneurial thinking.
+                    </p>
+                </div>
+                <div class="bg-gray-800 bg-opacity-70 rounded-2xl p-6 shadow-xl border border-gray-700 hover:scale-105 transition-transform duration-300 card-hover">
+                    <img src="data:image/jpeg;base64,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 w==" alt="STEM Spark Robotics Competition" class="rounded-xl mb-4 w-full h-auto">
+                    <h4 class="text-xl font-bold text-gray-200 mb-2">STEM Spark Robotics Competition</h4>
+                    <p class="text-gray-400">
+                        I participated in the STEM Spark Robotics Competition, working with the Avishkaar robotics team to design, build, and program a robot to complete specific tasks, earning accolades for innovation.
+                    </p>
+                </div>
+                <div class="bg-gray-800 bg-opacity-70 rounded-2xl p-6 shadow-xl border border-gray-700 hover:scale-105 transition-transform duration-300 card-hover">
+                    <a href="https://www.cloudskillsboost.google/public_profiles/36e31a99-602c-4471-85fe-d8b0c8ce1050/badges/8284159?utm_medium=social&utm_source=linkedin&utm_campaign=ql-social-share" target="_blank" rel="noopener noreferrer">
+                        <img src="https://assets.cloudskillsboost.google/images/badges/google-cloud-badge-generative-ai.svg" alt="Generative AI Course Badge" class="rounded-xl mb-4 w-full h-auto">
+                    </a>
+                    <h4 class="text-xl font-bold text-gray-200 mb-2">Generative AI Course & Badge</h4>
+                    <p class="text-gray-400">
+                        I successfully completed a comprehensive course on Generative AI, earning a recognized badge. This credential signifies my expertise in applying AI principles to creative and technical projects.
+                    </p>
+                </div>
+                <div class="bg-gray-800 bg-opacity-70 rounded-2xl p-6 shadow-xl border border-gray-700 hover:scale-105 transition-transform duration-300 card-hover">
+                    <img src="assets/images/projects/avishkaar-robotics-logo.jpeg" alt="Avishkaar Robotics" class="rounded-xl mb-4 w-full h-auto">
+                    <h4 class="text-xl font-bold text-gray-200 mb-2">Avishkaar Robotics Team</h4>
+                    <p class="text-gray-400">
+                        Active member of the Avishkaar Robotics team, working on innovative robotics projects and participating in various competitions to develop cutting-edge automated solutions.
+                    </p>
+                </div>
+                <div class="bg-gray-800 bg-opacity-70 rounded-2xl p-6 shadow-xl border border-gray-700 hover:scale-105 transition-transform duration-300 card-hover">
+                    <img src="assets/images/projects/technical-diagram.png" alt="Technical Project Diagram" class="rounded-xl mb-4 w-full h-auto">
+                    <h4 class="text-xl font-bold text-gray-200 mb-2">Technical Design & Documentation</h4>
+                    <p class="text-gray-400">
+                        Creating detailed technical diagrams and documentation for engineering projects, ensuring clear communication of complex mechanical and electronic systems.
+                    </p>
+                </div>
+                <div class="bg-gray-800 bg-opacity-70 rounded-2xl p-6 shadow-xl border border-gray-700 hover:scale-105 transition-transform duration-300 card-hover">
+                    <img src="assets/images/projects/exported-project-image.png" alt="Engineering Project Export" class="rounded-xl mb-4 w-full h-auto">
+                    <h4 class="text-xl font-bold text-gray-200 mb-2">CAD Design & Engineering Projects</h4>
+                    <p class="text-gray-400">
+                        Comprehensive CAD design work and engineering project development, showcasing mechanical design skills and technical problem-solving capabilities.
+                    </p>
+                </div>
+                <div class="bg-gray-800 bg-opacity-70 rounded-2xl p-6 shadow-xl border border-gray-700 hover:scale-105 transition-transform duration-300 card-hover">
+                    <img src="assets/images/projects/timestamp-project-1.jpeg" alt="Project Documentation 1" class="rounded-xl mb-4 w-full h-auto">
+                    <h4 class="text-xl font-bold text-gray-200 mb-2">Innovation Project Series - Part 1</h4>
+                    <p class="text-gray-400">
+                        First in a series of innovative projects developed during my time with various technical programs, demonstrating progressive skill development.
+                    </p>
+                </div>
+                <div class="bg-gray-800 bg-opacity-70 rounded-2xl p-6 shadow-xl border border-gray-700 hover:scale-105 transition-transform duration-300 card-hover">
+                    <img src="assets/images/projects/timestamp-project-2.jpeg" alt="Project Documentation 2" class="rounded-xl mb-4 w-full h-auto">
+                    <h4 class="text-xl font-bold text-gray-200 mb-2">Advanced Engineering Solutions</h4>
+                    <p class="text-gray-400">
+                        Advanced engineering solutions and prototype development, showcasing practical application of theoretical knowledge in real-world scenarios.
+                    </p>
+                </div>
+                <div class="bg-gray-800 bg-opacity-70 rounded-2xl p-6 shadow-xl border border-gray-700 hover:scale-105 transition-transform duration-300 card-hover">
+                    <img src="assets/images/projects/timestamp-project-3.jpeg" alt="Project Documentation 3" class="rounded-xl mb-4 w-full h-auto">
+                    <h4 class="text-xl font-bold text-gray-200 mb-2">Collaborative Innovation Project</h4>
+                    <p class="text-gray-400">
+                        Collaborative innovation project developed as part of team-based engineering challenges, emphasizing teamwork and creative problem-solving.
+                    </p>
+                </div>
+                <div class="bg-gray-800 bg-opacity-70 rounded-2xl p-6 shadow-xl border border-gray-700 hover:scale-105 transition-transform duration-300 card-hover">
+                    <img src="assets/images/projects/timestamp-project-4.jpeg" alt="Project Documentation 4" class="rounded-xl mb-4 w-full h-auto">
+                    <h4 class="text-xl font-bold text-gray-200 mb-2">Latest Innovation Showcase</h4>
+                    <p class="text-gray-400">
+                        Latest innovation showcase highlighting current projects and ongoing development work in mechanical engineering and IoT integration.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-separator"></div>
+
+        <section id="contact" class="container mx-auto max-w-3xl py-16 sm:py-24 text-center">
+            <div class="bg-gray-800 bg-opacity-70 backdrop-blur-sm rounded-3xl p-8 sm:p-12 shadow-2xl border border-gray-700">
+                <h3 class="text-3xl font-bold text-gray-200 mb-6 gradient-text">Get In Touch</h3>
+                <p class="text-gray-300 mb-8 max-w-xl mx-auto">
+                    Whether you have a question or just want to say hello, feel free to reach out. I am always open to new opportunities and collaborations.
+                </p>
+                <a href="mailto:smaranpatilnsk@gmail.com" class="inline-block px-8 py-3 rounded-full text-white font-semibold transition-all duration-300 ease-in-out transform hover:scale-105" style="background: linear-gradient(90deg, #10b981, #3b82f6);">
+                    Send Me an Email
+                </a>
+                <div class="mt-8">
+                    <p class="text-gray-400 mb-4">Or connect with me here:</p>
+                    <div class="flex flex-wrap justify-center space-x-6 gap-y-4">
+                        <div class="flex flex-col items-center">
+                            <a href="https://www.linkedin.com/in/smaranpatil?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="text-gray-400 hover:text-white transition-colors duration-200 transform hover:scale-110 social-icon-hover">
+                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.381 1.11-2.5 2.48-2.5s2.48 1.119 2.48 2.5zM.01 24h4.96v-18h-4.96v18zM14.634 8.24c-2.348 0-3.355 1.111-3.921 2.593v-2.593h-4.96v18h4.96v-9.352c0-2.623 1.632-4.57 3.818-4.57 2.43 0 3.42 1.745 3.42 4.568v9.354h4.962v-10.08c0-3.791-2.001-5.59-4.887-5.59z"/></svg>
+                            </a>
+                            <span class="mt-1 text-sm text-gray-400">Smaran Patil</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <a href="https://www.instagram.com/smarupatil?igsh=MWh6YTg0ZmlpZmM2ZA==" target="_blank" class="text-gray-400 hover:text-white transition-colors duration-200 transform hover:scale-110 social-icon-hover">
+                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.653 1.558 4.802 4.802.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.149 3.243-1.559 4.643-4.802 4.802-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-3.243-.149-4.643-1.559-4.802-4.802-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.149-3.243 1.559-4.643 4.802-4.802 1.266-.058 1.646-.07 4.85-.07zm0-2.163c-3.259 0-3.667.014-4.947.072-4.35 1.844-5.228 3.738-5.388 5.388-.058 1.28-.072 1.69-.072 4.947s.014 3.667.072 4.947c.16 1.65 1.038 3.544 5.388 5.388 1.28.058 1.69.072 4.947.072s3.667-.014 4.947-.072c4.35-1.844 5.228-3.738 5.388-5.388.058-1.28.072-1.69.072-4.947s-.014-3.667-.072-4.947c-.16-1.65-1.038-3.544-5.388-5.388-1.28-.058-1.69-.072-4.947-.072zm0 5.838c-3.41 0-6.162 2.752-6.162 6.162s2.752 6.162 6.162 6.162 6.162-2.752 6.162-6.162-2.752-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.791-4-4s1.791-4 4-4 4 1.791 4 4-1.791 4-4 4zm6.406-11.845c-.868 0-1.573-.705-1.573-1.573s.705-1.573 1.573-1.573c.868 0 1.573.705 1.573 1.573s-.705 1.573-1.573 1.573z"/></svg>
+                            </a>
+                            <span class="mt-1 text-sm text-gray-400">@smarupatil</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <a href="https://x.com/smarupatil?t=6MJhWARhzdQ_trX9uIidwA&s=09" target="_blank" class="text-gray-400 hover:text-white transition-colors duration-200 transform hover:scale-110 social-icon-hover">
+                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.901 1.153C17.518.736 16.104.721 14.69.721 12.396.721 10.103 1.455 8.164 2.875 6.225 4.295 4.757 6.18 3.824 8.272.766 14.887 2.14 20.916 8.106 23.336c2.479 1.107 4.957 1.487 7.436 1.487 2.65 0 5.299-.379 7.842-1.137.942-.284 1.884-.65 2.763-1.114.71-.371 1.419-.773 2.052-1.258.125-.098.24-.202.35-.313.33-.332.65-.678.966-1.041.139-.164.276-.33.413-.497.55-.662 1.077-1.353 1.583-2.072.18-.258.358-.517.533-.775.485-.71.954-1.428 1.407-2.158.204-.333.398-.667.584-1.002.483-.872.937-1.776 1.365-2.705.155-.333.307-.667.452-1.002.33-.777.636-1.564.918-2.361.073-.205.145-.41.215-.615.228-.679.444-1.36.648-2.049.06-.205.12-.41.176-.615.158-.553.304-1.11.44-1.666.04-.158.077-.317.114-.474.084-.42.164-.842.235-1.264.02-.128.037-.257.054-.385.03-.23.056-.46.078-.69.014-.143.027-.286.038-.429.015-.157.027-.315.037-.472.01-.157.017-.315.024-.472.006-.157.01-.315.01-.472V6.632h-.008zM12 21.018c-2.017 0-4.032-.505-5.917-1.464C4.305 18.52 2.636 16.593 1.966 14.162c-.89-3.242.062-6.223 2.126-8.293 2.222-2.223 5.48-3.09 8.791-2.483 3.321.608 5.922 2.656 7.427 5.767 1.505 3.111 1.258 6.549-.785 9.423-1.895 2.71-5.153 4.292-8.495 4.292z"/></svg>
+                            </a>
+                            <span class="mt-1 text-sm text-gray-400">@smarupatil</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <a href="https://www.linkedin.com/company/ultimate-engineering/" target="_blank" class="text-gray-400 hover:text-white transition-colors duration-200 transform hover:scale-110 social-icon-hover">
+                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.381 1.11-2.5 2.48-2.5s2.48 1.119 2.48 2.5zM.01 24h4.96v-18h-4.96v18zM14.634 8.24c-2.348 0-3.355 1.111-3.921 2.593v-2.593h-4.96v18h4.96v-9.352c0-2.623 1.632-4.57 3.818-4.57 2.43 0 3.42 1.745 3.42 4.568v9.354h4.962v-10.08c0-3.791-2.001-5.59-4.887-5.59z"/></svg>
+                            </a>
+                            <span class="mt-1 text-sm text-gray-400">Ultimate Engineering</span>
+                        </div>
+                         <div class="flex flex-col items-center">
+                            <a href="https://www.instagram.com/ultimatensk?igsh=MXZ1bmN3Mmk1amY4YQ==" target="_blank" class="text-gray-400 hover:text-white transition-colors duration-200 transform hover:scale-110 social-icon-hover">
+                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.653 1.558 4.802 4.802.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.149 3.243-1.559 4.643-4.802 4.802-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-3.243-.149-4.643-1.559-4.802-4.802-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.149-3.243 1.559-4.643 4.802-4.802 1.266-.058 1.646-.07 4.85-.07zm0-2.163c-3.259 0-3.667.014-4.947.072-4.35 1.844-5.228 3.738-5.388 5.388-.058 1.28-.072 1.69-.072 4.947s.014 3.667.072 4.947c.16 1.65 1.038 3.544 5.388 5.388 1.28.058 1.69.072 4.947.072s3.667-.014 4.947-.072c4.35-1.844 5.228-3.738 5.388-5.388.058-1.28.072-1.69.072-4.947s-.014-3.667-.072-4.947c-.16-1.65-1.038-3.544-5.388-5.388-1.28-.058-1.69-.072-4.947-.072zm0 5.838c-3.41 0-6.162 2.752-6.162 6.162s2.752 6.162 6.162 6.162 6.162-2.752 6.162-6.162-2.752-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.791-4-4s1.791-4 4-4 4 1.791 4 4-1.791 4-4 4zm6.406-11.845c-.868 0-1.573-.705-1.573-1.573s.705-1.573 1.573-1.573c.868 0 1.573.705 1.573 1.573s-.705 1.573-1.573 1.573z"/></svg>
+                            </a>
+                            <span class="mt-1 text-sm text-gray-400">Ultimate Engineering</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="text-center py-8 text-gray-500 text-sm">
+            <p>&copy; 2024 Smaran Patil. All rights reserved.</p>
+        </footer>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // JavaScript for the 3D Mechanical Background
+        document.addEventListener("DOMContentLoaded", function() {
+            const canvas = document.getElementById('gear-canvas');
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+
+            // Add lighting
+            const ambientLight = new THREE.AmbientLight(0x404040, 2);
+            scene.add(ambientLight);
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+            directionalLight.position.set(0, 1, 1);
+            scene.add(directionalLight);
+
+            // Gear 1
+            const gear1Geometry = new THREE.TorusGeometry(3, 0.5, 16, 100);
+            const gear1Material = new THREE.MeshPhongMaterial({ color: 0x10b981, flatShading: true });
+            const gear1 = new THREE.Mesh(gear1Geometry, gear1Material);
+            gear1.position.set(-2, 2, 0);
+            scene.add(gear1);
+
+            // Gear 2
+            const gear2Geometry = new THREE.CylinderGeometry(2, 2, 0.5, 32);
+            const gear2Material = new THREE.MeshPhongMaterial({ color: 0x3b82f6, flatShading: true });
+            const gear2 = new THREE.Mesh(gear2Geometry, gear2Material);
+            gear2.position.set(2, -2, 0);
+            scene.add(gear2);
+
+            // Gear 3
+            const gear3Geometry = new THREE.TorusGeometry(1.5, 0.4, 16, 50);
+            const gear3Material = new THREE.MeshPhongMaterial({ color: 0xf59e0b, flatShading: true });
+            const gear3 = new THREE.Mesh(gear3Geometry, gear3Material);
+            gear3.position.set(0, 0, 0);
+            scene.add(gear3);
+
+            camera.position.z = 10;
+
+            let isDragging = false;
+            let previousMousePosition = { x: 0, y: 0 };
+
+            document.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                previousMousePosition = { x: e.clientX, y: e.clientY };
+            });
+
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                const deltaMove = {
+                    x: e.clientX - previousMousePosition.x,
+                    y: e.clientY - previousMousePosition.y
+                };
+                const rotationSpeed = 0.005;
+                const euler = new THREE.Euler(0, 0, 0, 'XYZ');
+                euler.setFromQuaternion(camera.quaternion);
+                euler.y += deltaMove.x * rotationSpeed;
+                euler.x += deltaMove.y * rotationSpeed;
+                camera.quaternion.setFromEuler(euler);
+
+                previousMousePosition = { x: e.clientX, y: e.clientY };
+            });
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+
+            // The animation loop
+            function animate() {
+                requestAnimationFrame(animate);
+
+                // Rotate gears
+                gear1.rotation.y += 0.005;
+                gear2.rotation.x += 0.007;
+                gear3.rotation.z += 0.01;
+
+                renderer.render(scene, camera);
+            }
+
+            // Start the animation on window load.
+            animate();
+        });
+
+        // JavaScript for "See More" functionality for both sections
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleContent = (linkId, contentId) => {
+                const link = document.getElementById(linkId);
+                const content = document.getElementById(contentId);
+
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    content.classList.toggle('expanded');
+                    if (content.classList.contains('expanded')) {
+                        link.textContent = 'See less...';
+                    } else {
+                        link.textContent = 'See more...';
+                    }
+                });
+            };
+
+            toggleContent('see-more-link-skills', 'more-info-skills');
+            toggleContent('see-more-link-about', 'more-info-about');
+        });
+    </script>
+</body>
+</html>
